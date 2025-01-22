@@ -37,10 +37,7 @@ Command line tool for getting system information with a render via
 ## Download and install
 
 ```bash
-cd $(mktemp -d)
-git clone https://github.com/av1ppp/chafa-welcome
-cd chafa-welcome
-go install ./cmd/chafa-welcome
+go install github.com/av1ppp/chafa-welcome/cmd/chafa-welcome@latest
 chafa-welcome
 ```
 
@@ -51,7 +48,7 @@ panic: validation error: stat /path/to/image.jpg: no such file or directory
 ```
 
 You will only need to specify the path to the image in the
-`~/chafa-welcome/config` file in the `source` field:
+`~/.chafa-welcome/config` file in the `source` field:
 
 ```toml
 [image]

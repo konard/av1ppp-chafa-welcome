@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"path/filepath"
 	"strings"
 
@@ -13,7 +14,8 @@ import (
 
 func main() {
 	if err := innerMain(); err != nil {
-		panic(err)
+		fmt.Fprintln(os.Stderr, err.Error())
+		os.Exit(1)
 	}
 }
 
@@ -30,7 +32,7 @@ func innerMain() error {
 
 	info, err := sysinfo.Collect(conf)
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to collect system info: %s", err.Error())
 	}
 	infoLines := strings.Split(info.String(), "\n")
 	infoNumberLines := len(infoLines)

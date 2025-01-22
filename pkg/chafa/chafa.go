@@ -18,6 +18,7 @@ func WithSymbols(symbols string) string {
 }
 
 func Execute(bin string, image string, args ...string) (string, error) {
+	args = append([]string{"-f", "symbols"}, args...)
 	args = append(args, image)
 	cmd := exec.Command(bin, args...)
 	stdout := &bytes.Buffer{}

@@ -1,11 +1,21 @@
 package sysinfo
 
 import (
-	"github.com/av1ppp/chafa-welcome/internal/config"
+	"errors"
 	"runtime"
+
+	"github.com/av1ppp/chafa-welcome/internal/config"
 )
 
 func collectOS(conf *config.Config) (string, error) {
+	if runtime.GOOS == "darwin" {
+		return "Darwin", nil
+	}
+
+	if runtime.GOOS == "windows" {
+		return "", errors.New("Windows is not supproted")
+	}
+
 	data, err := execute("sh", "-c", "cat /etc/*-release")
 	if err != nil {
 		return "", err

@@ -1,8 +1,10 @@
 package sysinfo
 
 import (
-	"github.com/av1ppp/chafa-welcome/internal/config"
+	"fmt"
 	"strings"
+
+	"github.com/av1ppp/chafa-welcome/internal/config"
 )
 
 const systemInfoBodyMaxRows = 10
@@ -37,53 +39,53 @@ func Collect(conf *config.Config) (*SystemInfo, error) {
 	)
 
 	if info.HeaderUsername, err = collectUsername(); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to collect username: %s", err.Error())
 	}
 
 	if info.HeaderHostname, err = collectHostname(); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to collect hostname: %s", err.Error())
 	}
 
 	info.HeaderUnderline = strings.Repeat("~", len(info.HeaderUsername)+1+len(info.HeaderHostname))
 
 	if info.OS, err = collectIfInclude(conf.Body.OS.Include, conf, collectOS); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to collect os name: %s", err.Error())
 	}
 
 	if info.Kernel, err = collectIfInclude(conf.Body.Kernel.Include, conf, collectKernel); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to collect kernel name: %s", err.Error())
 	}
 
 	if info.Uptime, err = collectIfInclude(conf.Body.Uptime.Include, conf, collectUptime); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to collect uptime: %s", err.Error())
 	}
 
 	if info.Packages, err = collectIfInclude(conf.Body.Packages.Include, conf, collectPackages); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to collect packages: %s", err.Error())
 	}
 
 	if info.Shell, err = collectIfInclude(conf.Body.Shell.Include, conf, collectShell); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to collect shell name: %s", err.Error())
 	}
 
 	if info.Terminal, err = collectIfInclude(conf.Body.Terminal.Include, conf, collectTerminal); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to collect terminal name: %s", err.Error())
 	}
 
 	if info.CPU, err = collectIfInclude(conf.Body.CPU.Include, conf, collectCPU); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to collect cpu: %s", err.Error())
 	}
 
 	if info.Memory, err = collectIfInclude(conf.Body.Memory.Include, conf, collectMemory); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to collect memory: %s", err.Error())
 	}
 
 	if info.LocalIP, err = collectIfInclude(conf.Body.LocalIP.Include, conf, collectLocalIP); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to collect local ip: %s", err.Error())
 	}
 
 	if info.GlobalIP, err = collectIfInclude(conf.Body.GlobalIP.Include, conf, collectGlobalIP); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to collect global ip: %s", err.Error())
 	}
 
 	return &info, nil
