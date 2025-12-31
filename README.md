@@ -55,6 +55,74 @@ You will only need to specify the path to the image in the
 source = '/real/path/to/image.jpg'
 ```
 
+## Community Features
+
+### Browse Community Presets
+
+Discover and apply configurations shared by the community:
+
+```bash
+chafa-welcome --gallery
+# or
+chafa-welcome --community
+```
+
+This opens an interactive browser where you can:
+- Browse popular, newest, or alphabetically sorted presets
+- Filter by category (e.g., "Cyberpunk", "Minimal Dark", "Retro Green")
+- Preview preset details and apply with a single key press
+- Presets are automatically downloaded and configured
+
+### Share Your Configuration
+
+Share your current configuration with others via GitHub Gist:
+
+```bash
+# Share as private gist (requires gh CLI or GITHUB_TOKEN)
+chafa-welcome --share
+
+# Share as public gist
+chafa-welcome --share --public
+
+# Include your ASCII art image
+chafa-welcome --share --with-image
+```
+
+### Import Configuration
+
+Import a configuration from a shared GitHub Gist:
+
+```bash
+chafa-welcome --import https://gist.github.com/username/gist_id
+```
+
+### Contributing to the Gallery
+
+To add your preset to the community gallery:
+
+1. Share your configuration: `chafa-welcome --share --public`
+2. Create a Pull Request at [chafa-welcome-presets](https://github.com/av1ppp/chafa-welcome-presets)
+
+## Command Line Options
+
+```
+Usage: chafa-welcome [OPTIONS]
+
+Options:
+  --help            Show help message
+  --version         Show version information
+
+Community Features:
+  --gallery         Browse community presets gallery
+  --community       Alias for --gallery
+
+Sharing:
+  --share           Share current configuration to GitHub Gist
+  --public          Make the shared gist public (default: private)
+  --with-image      Include the image when sharing
+  --import URL      Import configuration from a GitHub Gist URL
+```
+
 ## Development environment
 
 The application was developed and tested with the following versions:
